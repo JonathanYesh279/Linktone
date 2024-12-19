@@ -8,13 +8,8 @@ const router = createRouter({
       path: '/linktone',
       name: 'LinktoneIndex',
       component: LinktoneIndex,
-    },
-    // {
-    //   path:'/linktone/:id',
-    //   name: 'LinktoneDetails',
-    //   component: LinktoneDetails
-    // }
-  ],
+    }
+  ]
 })
 
 export default router

@@ -58,13 +58,41 @@ export default {
   display: flex;
   align-items: flex-start;
   padding: 10px;
+  font-size:22px;
   flex-direction: column;
   width: 100%;
-  z-index: 1000;
+  z-index: 1;
+
+  h3 {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  p:nth-child(2) {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  p:nth-child(3) {
+    opacity: 0.7;
+  }
 
   .date {
     font-size: 12px;
     color: rgb(255, 251, 251);
+  }
+
+  @media(max-width: 600px) {
+    h3 {
+      font-size: 14px;
+    }
+    p:nth-child(2) {
+      font-size: 10px;
+    }
+    p:nth-child(3) {
+      font-size: 6px;
+    }
   }
 }
 
@@ -72,6 +100,10 @@ export default {
   position: absolute;
   bottom: -20px;
   left: 20px;
+
+  @media (max-width: 600px) {
+    left: 10px;
+  }
 }
 .play {
   display: flex;

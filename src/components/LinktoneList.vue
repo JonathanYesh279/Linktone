@@ -1,7 +1,9 @@
 <template>
   <div class="linktones_con">
     <ul class="linktone-list">
-      <li v-for="linktone in linktones" :key="linktone.id">
+      <li v-for="linktone in linktones" 
+          :key="linktone.id" 
+          @click="$emit('isDetailsOpen', linktone)">
         <linktone-preview :linktone="linktone" />
       </li>
     </ul>

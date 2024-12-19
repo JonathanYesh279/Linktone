@@ -59,19 +59,32 @@
         <li class="playlist-item">אהבתי</li>
       </ul>
     </div>
+  </nav>
 
+  <nav class="mobile-navbar" :class="(modelValue ? '' : 'closed')">
+    <span class="icon" @click="$emit('update:modelValue', false)">
+      <i class="fa-solid fa-x"></i>
+    </span>
+      <ul class="mobile-list">
+        <li class="mobile-list-item">ראשי</li>
+        <li class="mobile-list-item">בשבילך</li>
+        <li class="mobile-list-item">לינקיפדיה</li>
+        <li class="mobile-list-item">המצעד</li>
+        <li class="mobile-list-item">הודעות</li>
+        <li class="mobile-list-item">הגדרות</li>
+      </ul>
   </nav>
 </template>
 
 <script>
-export default {
-  name: "Sidebar",
-  methods: {
-    // toggleMode() {
-
-    // }
+  export default {
+    name: 'Sidebar',
+    props: ['modelValue'],
+    emits: ['update:modelValue'],
+    data() {
+      return this.modelValue
+    }
   }
-}
 </script>
 
 <style lang="scss">
@@ -79,11 +92,12 @@ export default {
   display: flex;
   flex-direction: column;
   font-size: 14px;
-  width: 212px;
+  width: 300px;
   height: 100vh;
   background-color: #1e212a;
   color: #fff;
   gap: 20px;
+
 
   .logo {
     display: flex;
@@ -139,6 +153,7 @@ export default {
     }
     .list-item {
       padding-inline: 10px;
+      font-size: 20px;
     }
   }
 
@@ -148,16 +163,66 @@ export default {
     gap: 10px;
     padding: 20px;
 
+    h4 {
+      font-size: 20px;
+    }
+
     .playlist-items {
       display: flex;
       flex-direction: column;
       padding-inline: 20px;
 
       .playlist-item {
-        font-size: 0.8rem;
+        font-size: 16px;
         padding: 3px;
       }
     }
   }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 }
+
+@media(min-width: 601px) {
+  .mobile-navbar {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .mobile-navbar {
+    position: fixed;
+    background-color: #fff;
+    width: 70%;
+    height: 100%;
+    z-index: 2;
+    transition: 0.3s ease-in-out;
+
+
+    &.closed {
+      opacity: 0;height: 0;width: 0;
+      transition: 0.3s ease-in-out;
+
+    }
+
+    .mobile-list {
+      list-style: none;
+      padding: 20px;
+      opacity: 0.6;
+
+      .mobile-list-item {
+        padding: 10px;
+        border-bottom: 1px solid lightgrey;
+      }
+    }
+
+    .icon {
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px;
+    }
+  }
+}
+
 </style>

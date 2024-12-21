@@ -7,8 +7,8 @@
 
     <div class="actions">
       <div class="btn-container">
-        <button class="btn" @click="modeToggle">בהיר</button>
-        <button class="btn" @click="modeToggle">כהה</button>
+        <button class="btn" :class="{ active: mode === 'light' }" @click="toggleMode('light')">בהיר</button>
+        <button class="btn" :class="{ active: mode === 'dark' }" @click="toggleMode('dark')">כהה</button>
       </div>
     </div>
 
@@ -77,12 +77,19 @@
 </template>
 
 <script>
-  export default {
-    name: 'Sidebar',
-    props: ['modelValue'],
-    emits: ['update:modelValue'],
-    data() {
-      return this.modelValue
+export default {
+  name: 'Sidebar',
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
+  data() {
+    return {
+      mode: 'light'
+    }
+  },
+      methods: {
+      toggleMode(selectMode) {
+        this.mode = selectMode
+      }
     }
   }
 </script>
@@ -123,6 +130,7 @@
         padding-inline: 5px;
         color:#fff;
         cursor: pointer;
+        transition: all 0.3s ease;
 
         &.active {
           background-color: #fff;
@@ -154,6 +162,7 @@
     .list-item {
       padding-inline: 10px;
       font-size: 20px;
+      cursor: pointer;
     }
   }
 

@@ -1,9 +1,9 @@
 <template>
-  <div class="linktone-preview">
+  <div class="linktone-preview" :style="{ backgroundImage: `url(${linktone.img})` }">
     <div class="content-preview">
-      <h3>גל אדם</h3>
-      <p>איתך עושה לי טוב</p>
-      <p class="date">20.05.2024</p>
+      <h3>{{ linktone.linktone_title }}</h3>
+      <p>{{ linktone.linktone_song_title }}</p>
+      <p class="date">{{ linktone.linktone_date }}</p>
       <div class="btn"></div>
       <div class="play-container">
        <div class="play">
@@ -33,10 +33,10 @@ export default {
   align-items: flex-end;
   border-radius: 14px;
   color: #fff;
-  width: 100%;
-  height: 100%;
+  aspect-ratio: 1;
+  max-width: 100%;
+  height: auto;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.23);
-  background-image: url('../src/assets/linktone_image.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

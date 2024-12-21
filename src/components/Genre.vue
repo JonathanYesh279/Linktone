@@ -1,11 +1,15 @@
 <template>
     <div class="genre-list-container">
-        <ul class="genre-list" :class="{ 'collapsed': !isExpanded }">
-            <li class="genre" :key="filter.name" @click="filter.active =! filter.active" v-for="filter in filteredGenres" v-text="filter.name" :class="{ active: filter.active }" ></li>
-        </ul>
-        <div class="icon-container" @click="toggleGenre()" :class="{rotated: isExpanded }">
-            <span class="bg"></span>
-            <i class="fa-solid fa-chevron-up" ></i>
+        <div class="content-wrapper">
+
+            <ul class="genre-list" :class="{ 'collapsed': !isExpanded }">
+                <li class="genre" :key="filter.name" @click="filter.active =! filter.active" v-for="filter in filteredGenres" v-text="filter.name" :class="{ active: filter.active }" ></li>
+            </ul>
+
+            <div class="icon-container" @click="toggleGenre()" :class="{rotated: isExpanded }">
+                <span class="bg"></span>
+                <i class="fa-solid fa-chevron-up" ></i>
+            </div>
         </div>
     </div>
 </template>
@@ -45,37 +49,38 @@ export default {
         justify-content: flex-start;
         padding: 30px;
         background-color: #fff;
-        width:60%;
+        width:90%;
+        
 
-        .genre-list { display: flex; justify-content: flex-start; gap: 20px; flex-wrap: wrap; width: 100%; height: 100%;  
-            &.collapsed { height: 80px; overflow: hidden; }
+        .content-wrapper {position: relative; width: 100%; display: flex; gap: 20px;
+
+        .genre-list { display: flex; justify-content: flex-start; gap: 20px; flex-wrap: wrap; width: 100%;      
+            &.collapsed { max-height: 80px; overflow: hidden; }
             @media (max-width: 600px) {
                 .genre {padding: 10px;}
                 &.collapsed { height: 60px; }
-            }
-            
+            }   
         }
-
         .icon-container {
-            position: relative;
+            position: absolute;
+            right: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100%;
             cursor: pointer;
+            .fa-chevron-up {
+                &{position: absolute; transform: rotate(0deg); transition: transform 0.3s ease; }
+            }
             &.rotated {
                 .fa-chevron-up{transform: rotate(180deg);}
             }
-
             .bg { display: flex; background-color:#dfdfdf; height: 20px; width: 20px; align-items: center; justify-content: center; padding: 35px; border-radius: 50%;opacity: 0.3; 
                 @media (max-width: 600px) {
                     padding: 20px;
             }
             }
-            .fa-chevron-up {
-                &{position: absolute; }
-            }
         }
+    }
 
         .genre {
             list-style: none;
@@ -85,6 +90,7 @@ export default {
             border-radius: 15px;
             padding: 20px 45px 20px 45px;
             cursor: pointer;
+            transition: all 0.3s ease;
             &.active {
                 background-color: #ff256e;
                 color: #fff;

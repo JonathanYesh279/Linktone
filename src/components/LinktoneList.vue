@@ -3,7 +3,7 @@
     <ul class="linktone-list">
       <li v-for="linktone in linktones" 
           :key="linktone.id" 
-          @click="$emit('isDetailsOpen', linktone)">
+          @click="handleClick(linktone)">
         <linktone-preview :linktone="linktone" />
       </li>
     </ul>
@@ -24,11 +24,17 @@ export default {
       required: true,
     },
   },
+  emits: ['open-details'],
+  methods: {
+    handleClick(linktone) {
+      this.$emit('open-details', linktone)
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.linktones_con { flex: 1; }
+.linktones_con { flex: 1; padding: 0 20px; }
 .linktone-list {
   &::-webkit-scrollbar {
     width: 6px;
@@ -49,25 +55,41 @@ export default {
   overflow: auto;
   max-height: 720px;
   padding-right: 20px;
+  padding-left: 50px;
   direction: ltr;
+  width: 100%;
   @media (max-width: 1540px) { 
       grid-template-columns: repeat(4, 1fr);
 
   }
 
-  @media (max-width: 1232px) {
-    grid-template-columns: repeat(3, 1fr);
+  @media (max-width: 1220px) {
+    grid-template-columns: repeat(3,  1fr);
+    padding-left: 150px;
+    
     }
   
-  @media (max-width: 700px) {
+  @media (max-width: 1130px) {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding-left: 200px;
   }
-  
 
-  li {direction: rtl;
-    aspect-ratio: 1;
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    padding-right:10px;
+    padding-left: 0;
   }
-  
+
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+    padding-right: 10px;
+    padding-left: 0;
+  }
+
+  li {direction: rtl; width: 100%; height: auto; aspect-ratio: 1;}
 }
 
 

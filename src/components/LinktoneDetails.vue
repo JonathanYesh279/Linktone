@@ -94,7 +94,7 @@
     }
 
     .image-container {display:flex; justify-content: center; padding: 10px; width: 100%;
-        img {width: 100%; height: 40vh; border-radius: 30px;}
+        img {width: 100%; aspect-ratio: 16/9;} 
     }
     
     .description {padding: 20px; color: #fff; border-bottom: 1px solid #fff;}

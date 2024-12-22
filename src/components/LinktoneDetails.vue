@@ -20,19 +20,15 @@
 
         <nav class="nav-details">
             <ul class="list-details">
-                <li class="list-item">ראשי</li>
-                <li class="list-item">מילים</li>
-                <li class="list-item">קרדיטים</li>
-                <li class="list-item">הורדות</li>
-                <li class="list-item">עיתונות</li>
-                <li class="list-item">לינקטונים נוספים</li>
+                 <li class="list-item" :key="activeLink.name" @click="activeLink.active =! activeLink.active"             v-for="activeLink in activeLinks" v-text="activeLink.name" :class="{ active: activeLink.active }" >
+        </li>
             </ul>
         </nav>
 
         <div class="details-content">
             <div class="details-content-header">
-                <h1>לירן דנינו</h1>
-                <p>צמאה לאהבה</p>
+                <h1>{{ linktone.linktone_title }}</h1>
+                <p>{{ linktone.linktone_song_title }}</p>
             </div>
             <div class="social-container">
                 <div class="social">
@@ -48,11 +44,11 @@
         </div>
 
         <div class="image-container">
-            <img src="../assets/linktone_image.jpg" />
+            <img :src="linktone.img" />
         </div>
         <div class="description">
             <p>
-               לירן דנינו אחד מהזמרים הכי פחות אהובים ומהיוצרים הפחות פוריים בישראל. בשיר חדש עם קליפ רגיל מינוס בכיכובה של אלינה מארץ הפלאות בת זוגו החדשה של לירן. 
+              {{ linktone.description || 'לירן דנינו אחד מהזמרים הכי פחות אהובים ומהיוצרים הפחות פוריים בישראל. בשיר חדש עם קליפ רגיל מינוס בכיכובה של אלינה מארץ הפלאות בת זוגו החדשה של לירן.' }} 
             </p>
         </div>
     </div>
@@ -62,10 +58,22 @@
   export default {
     name: 'LinktoneDetails',
     props: {
-      linktone: {
-        type: Object,
-        required: false
-      }
+        linktone: {
+            type: Object,
+            required: true
+        }
+    },
+    data() {
+        return {
+            activeLinks: [
+                {name: 'ראשי', active: false},
+                {name: 'מילים', active: false},
+                {name: 'קרדיטים', active: false},
+                {name: 'הורדות', active: false},
+                {name: 'עיתונות', active: false},
+                {name: 'לינקטונים נוספים', active: false}
+            ]
+        }
     }
   }
   </script>
@@ -81,20 +89,26 @@
     .nav-details {
         display: flex; color: #fff; width: 100%; padding: 20px; justify-content: center;
         .list-details { display: flex; list-style: none; border-bottom: 1px solid #fff; padding-bottom: 10px; gap: 5px;
-            .list-item { padding-left: 30px; font-size: 14px;}
+            .list-item { padding-left: 30px; font-size: 14px; cursor: pointer;
+                &.active {border-bottom: 2px solid #fff;}
+            }
+
         }
     }
 
     .details-content {display: flex; justify-content: space-between; align-items: center; padding-inline: 20px;
-        .details-content-header {color: #fff;}
+        .details-content-header {display: flex; flex-direction: column; color: #fff;
+            h1 {line-height: 1; font-size: 26px;}
+            p {font-size: 14px;}
+        }
         .social-container {
             .social {display: flex; gap: 10px; color: #fff;}
-             .duration {display:flex; justify-content: flex-end; color: #fff; padding: 5px;}
+             .duration {display:flex; justify-content: flex-end; color: #fff; padding-top: 5px;}
         }
     }
 
     .image-container {display:flex; justify-content: center; padding: 10px; width: 100%;
-        img {width: 100%; aspect-ratio: 16/9;} 
+        img {width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 20px;} 
     }
     
     .description {padding: 20px; color: #fff; border-bottom: 1px solid #fff;}
